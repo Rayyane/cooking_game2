@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>arekta drag n drop site</title>
+
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+
+	<link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+<body>
+
+	<section>
+		<div class="container py-5">
+			<div class="row">
+				<div class="col-12">
+					<div id="drag-1" class="draggable">
+					  <p> You can drag one element </p>
+					</div>
+					<div id="drag-2" class="draggable">
+					  <p> with each pointer </p>
+					</div>
+
+					<div id="no-drop" class="drag-drop draggable"> #no-drop </div>
+
+					<div id="yes-drop" class="drag-drop draggable"> #yes-drop </div>
+
+					<div id="outer-dropzone" class="dropzone">
+					  #outer-dropzone
+					  <div id="inner-dropzone" class="dropzone">#inner-dropzone</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
