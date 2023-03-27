@@ -1,25 +1,21 @@
-#drag-1, #drag-2 {
-  width: 25%;
-  min-height: 6.5em;
-  margin: 1rem 0 0 1rem;
-  background-color: #29e;
-  color: white;
-  border-radius: 0.75em;
-  padding: 4%;
-  touch-action: none;
-  user-select: none;
-  transform: translate(0px, 0px);
-  /*transition: 0.5s;*/
-}
+* {
+	font-family: 'Press Start 2P', cursive;
 
-#outer-dropzone {
-  height: 140px;
 }
-
 #inner-dropzone {
-  height: 80px;
+  height: 400px;
 }
-
+#yes-drop, #no-drop {
+	height: 150px;
+	width: 150px;
+	background-color: transparent;
+}
+#yes-drop > #yes-drop img {
+	position: relative;
+	/*top: -80%;
+	left: -50%;
+	transform: translate(-50%, -50%);*/
+}
 .dropzone {
   background-color: #bfe4ff;
   border: dashed 4px transparent;
@@ -35,9 +31,9 @@
 }
 
 .drop-target {
-  background-color: yellow;
+  /*background-color: yellow;
   border-color: maroon;
-  border-style: solid;
+  border-style: solid;*/
 }
 
 .drag-drop {
@@ -48,7 +44,7 @@
 
   color: #fff;
   background-color: #29e;
-  border: solid 2px #fff;
+  /*border: solid 2px #fff;*/
 
   touch-action: none;
   transform: translate(0px, 0px);
@@ -57,9 +53,23 @@
 }
 
 .drag-drop.can-drop {
-  color: red;
-  background-color: #888888;
+  /*color: red;
+  background-color: #888888;*/
+  border: none;
 }
 .dropped {
-
+	/*display: none;*/
+	animation: disappear 5s forwards;
+	webkit-animation-iteration-count: 1;
+}
+@keyframes disappear {
+	0% {
+		opacity: 0;
+	}
+	1% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }

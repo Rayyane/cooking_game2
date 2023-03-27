@@ -12,7 +12,7 @@ interact('.draggable')
       })
     ],
     // enable autoScroll
-    autoScroll: true,
+    autoScroll: false,
 
     listeners: {
       // call this function on every dragmove event
@@ -54,7 +54,12 @@ function dragStopListener(e) {
   /*var target = e.target;
   target.setAttribute('data-x', 0);
   console.log(target.getAttriute(data-x));*/
-  if(!e.target.classList.contains('dropped')) {
+  if(e.target.classList.contains('dropped')) {
+    drag_pos.x = 0;
+    drag_pos.y = 0;
+    e.target.classList.remove('draggable')
+  }
+  else {
     drag_pos.x = 0;
     drag_pos.y = 0;
     e.target.style.transform = 'translate(0px, 0px)';
@@ -83,17 +88,17 @@ interact('.dropzone')
     // feedback the possibility of a drop
     dropzoneElement.classList.add('drop-target')
     draggableElement.classList.add('can-drop')
-    draggableElement.textContent = 'Dragged in'
+    /*draggableElement.textContent = 'Dragged in'*/
   },
   ondragleave: function (event) {
     // remove the drop feedback style
     event.target.classList.remove('drop-target')
     event.relatedTarget.classList.remove('can-drop')
-    event.relatedTarget.textContent = 'Dragged out'
+    /*event.relatedTarget.textContent = 'Dragged out'*/
   },
   ondrop: function (event) {
     var draggableElement = event.relatedTarget
-    event.relatedTarget.textContent = 'Dropped'
+    /*event.relatedTarget.textContent = 'Dropped'*/
     draggableElement.classList.add('dropped')
   },
   ondropdeactivate: function (event) {
@@ -104,16 +109,3 @@ interact('.dropzone')
   }
 })
 
-/*interact('.drag-drop')
-  .draggable({
-    inertia: true,
-    modifiers: [
-      interact.modifiers.restrictRect({
-        restriction: 'parent',
-        endOnly: true
-      })
-    ],
-    autoScroll: true,
-    // dragMoveListener from the dragging demo above
-    listeners: { move: dragMoveListener }
-  })*/
