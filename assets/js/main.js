@@ -1,4 +1,5 @@
 // target elements with the "draggable" class
+var drag_pos = {x: 0, y: 0}
 interact('.draggable')
   .draggable({
     // enable inertial throwing
@@ -16,9 +17,9 @@ interact('.draggable')
     listeners: {
       // call this function on every dragmove event
       move: dragMoveListener,
-
+      end: dragStopListener
       // call this function on every dragend event
-      end (event) {
+      /*end (event) {
         var textEl = event.target.querySelector('p')
 
         textEl && (textEl.textContent =
@@ -26,29 +27,44 @@ interact('.draggable')
           (Math.sqrt(Math.pow(event.pageX - event.x0, 2) +
                      Math.pow(event.pageY - event.y0, 2) | 0))
             .toFixed(2) + 'px')
-        /*event.target.style.transform = 'translate(0px, 0px)';*/
-      }
+      }*/
     }
   })
 
-function dragMoveListener (event) {
-  var target = event.target
+function dragMoveListener (e) {
+  var target = e.target
   // keep the dragged position in the data-x/data-y attributes
-  var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
-  var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+  /*var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+  var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy*/
+  drag_pos.x += e.dx;
+  drag_pos.y += e.dy;
+
+  e.target.style.transform = 'translate(' + drag_pos.x + 'px, ' + drag_pos.y + 'px)';
 
   // translate the element
-  target.style.transform = 'translate(' + x + 'px, ' + y + 'px)'
+  /*target.style.transform = 'translate(' + x + 'px, ' + y + 'px)'*/
 
   // update the posiion attributes
-  target.setAttribute('data-x', x)
-  target.setAttribute('data-y', y)
+  /*target.setAttribute('data-x', x)
+  target.setAttribute('data-y', y)*/
+
 }
 
-// this function is used later in the resizing and gesture demos
-window.dragMoveListener = dragMoveListener
+function dragStopListener(e) {
+  /*var target = e.target;
+  target.setAttribute('data-x', 0);
+  console.log(target.getAttriute(data-x));*/
+  if(!e.target.classList.contains('dropped')) {
+    drag_pos.x = 0;
+    drag_pos.y = 0;
+    e.target.style.transform = 'translate(0px, 0px)';
+  }
+  
+  /*console.log(e.target.classList);*/
+}
 
-interact('.dropzone').dropzone({
+interact('.dropzone')
+  .dropzone({
   // only accept elements matching this CSS selector
   accept: '#yes-drop',
   // Require a 75% element overlap for a drop to be possible
@@ -76,16 +92,19 @@ interact('.dropzone').dropzone({
     event.relatedTarget.textContent = 'Dragged out'
   },
   ondrop: function (event) {
+    var draggableElement = event.relatedTarget
     event.relatedTarget.textContent = 'Dropped'
+    draggableElement.classList.add('dropped')
   },
   ondropdeactivate: function (event) {
     // remove active dropzone feedback
     event.target.classList.remove('drop-active')
     event.target.classList.remove('drop-target')
+
   }
 })
 
-interact('.drag-drop')
+/*interact('.drag-drop')
   .draggable({
     inertia: true,
     modifiers: [
@@ -97,4 +116,4 @@ interact('.drag-drop')
     autoScroll: true,
     // dragMoveListener from the dragging demo above
     listeners: { move: dragMoveListener }
-  })
+  })*/
